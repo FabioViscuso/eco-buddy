@@ -5,7 +5,7 @@ export default function Calendar() {
 
   return (
     <section
-      id={context}
+      id={`section-${context}`}
       className="h-full w-full flex flex-col justify-center items-center gap-10"
     >
       <p>calendar</p>

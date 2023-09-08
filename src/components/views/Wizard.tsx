@@ -5,11 +5,11 @@ export default function Wizard() {
   const context = Views.Wizard;
   return (
     <section
-      id={context}
+      id={`section-${context}`}
       className="h-full w-full flex flex-col justify-center items-center gap-10"
     >
       <p>wizard</p>
-      <ViewSelectButton className="text-green-600 hover:text-green-400 hover:underline" currentView={context} targetView={Views.Calendar}>
+      <ViewSelectButton className="text-green-600 hover:text-green-400 hover:underline" targetView={Views.Calendar}>
         Fatto!
       </ViewSelectButton>
     </section>

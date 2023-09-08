@@ -6,7 +6,7 @@ export default function Welcome() {
   
   return (
     <section
-      id={Views.Welcome}
+      id={`section-${context}`}
       className="h-full w-full flex flex-col justify-center items-center gap-10"
     >
       <h1 className="text-green-400 text-4xl">Ciao!</h1>
@@ -18,7 +18,6 @@ export default function Welcome() {
         <p>Per iniziare,&nbsp;</p>
         <ViewSelectButton
           className="text-green-600 hover:text-green-400 hover:underline"
-          currentView={context}
           targetView={Views.Wizard}
         >
           <span>imposta il calendario &#10230;</span>
