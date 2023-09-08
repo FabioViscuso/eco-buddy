@@ -10,12 +10,12 @@ const userStore = create<State>()(
   devtools(
     persist(
       (set) => ({
-        isFirstTime: false,
+        isFirstTime: true,
         setIsFirstTime: (flag) => set({ isFirstTime: flag }),
       }),
       {
         name: "appState",
-        storage: createJSONStorage(() => sessionStorage),
+        storage: createJSONStorage(() => localStorage),
       }
     )
   )
