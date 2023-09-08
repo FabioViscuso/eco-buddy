@@ -1,18 +1,29 @@
-import { Views } from "../../store/viewsStore";
+import { Views } from "../../state/viewsStore";
 import ViewSelectButton from "../ViewSelectButton";
 
 export default function Welcome() {
   const context = Views.Welcome;
+  
   return (
     <section
       id={Views.Welcome}
-      className="h-full flex flex-col justify-center gap-10"
+      className="h-full w-full flex flex-col justify-center items-center gap-10"
     >
-      <h1>Benvenuto</h1>
-      <p>Con RecyQ puoi gestire il calendario della raccolta differenziata</p>
-      <ViewSelectButton currentView={context} targetView={Views.Wizard}>
-        Imposta il calendario
-      </ViewSelectButton>
+      <h1 className="text-green-400 text-4xl">Ciao!</h1>
+      <p>
+        Con RecyQ puoi gestire il calendario della raccolta differenziata e, se
+        vuoi, ricevere una notifica appena arriva il momento di conferirla.
+      </p>
+      <div className="flex">
+        <p>Per iniziare,&nbsp;</p>
+        <ViewSelectButton
+          className="text-green-600 hover:text-green-400 hover:underline"
+          currentView={context}
+          targetView={Views.Wizard}
+        >
+          <span>imposta il calendario &#10230;</span>
+        </ViewSelectButton>
+      </div>
     </section>
   );
 }

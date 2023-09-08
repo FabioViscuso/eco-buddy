@@ -1,7 +1,7 @@
-import viewsStore, {Views} from "../../store/viewsStore";
+import viewsStore, { Views } from "../../state/viewsStore";
 
 export default function Settings() {
-  const setView = viewsStore(state => state.setView);
+  const setView = viewsStore((state) => state.setView);
 
   function handleResetSettings() {
     localStorage.clear();
@@ -10,7 +10,10 @@ export default function Settings() {
   }
 
   return (
-    <section id={`section-${Views.Settings}`}>
+    <section
+      id={`section-${Views.Settings}`}
+      className="h-full w-full flex flex-col justify-center items-center gap-10"
+    >
       <button onClick={handleResetSettings}>Reimposta l'applicazione</button>
     </section>
   );
