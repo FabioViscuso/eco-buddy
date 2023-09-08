@@ -10,7 +10,7 @@ export default function Settings() {
   }
 
   return (
-    <section>
+    <section id={`section-${Views.Settings}`}>
       <button onClick={handleResetSettings}>Reimposta l'applicazione</button>
     </section>
   );
