@@ -1,6 +1,6 @@
-import userStore from "../store/store";
-import { Views } from "../store/viewsStore";
-import viewsStore from "../store/viewsStore";
+import userStore from "../state/store";
+import { Views } from "../state/viewsStore";
+import viewsStore from "../state/viewsStore";
 
 const useViewSelector = () => {
   const isFirstTime = userStore(state => state.isFirstTime);
@@ -9,9 +9,9 @@ const useViewSelector = () => {
 
   return {
     handleViewSelector: (e: React.MouseEvent) => {
-      const newView: Views = e.currentTarget.getAttribute("data-view") as Views;
+      const newView: Views = e.currentTarget.getAttribute("data-nextview") as Views;
       setView(newView);
-      if (e.currentTarget.id === `context-${Views.Wizard}` && isFirstTime) {
+      if (e.currentTarget.getAttribute("data-currentview") === `${Views.Wizard}` && isFirstTime) {
         setIsFirstTime(false);
       }
     },
