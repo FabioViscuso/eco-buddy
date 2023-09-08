@@ -17,7 +17,7 @@ const viewsStore = create<State>()(
   devtools(
     persist(
       (set) => ({
-        view: Views.Welcome,
+        view: Views.Calendar,
         setView: (newView) => set({ view: newView }),
       }),
       {
