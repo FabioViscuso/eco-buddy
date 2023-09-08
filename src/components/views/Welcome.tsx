@@ -1,5 +1,5 @@
 import { Views } from "../../state/viewsStore";
-import ViewSelectButton from "../ViewSelectButton";
+import ViewSelectionButton from "../ViewSelectionButton";
 
 export default function Welcome() {
   const context = Views.Welcome;
@@ -16,12 +16,12 @@ export default function Welcome() {
       </p>
       <div className="flex">
         <p>Per iniziare,&nbsp;</p>
-        <ViewSelectButton
+        <ViewSelectionButton
           className="text-green-600 hover:text-green-400 hover:underline"
           targetView={Views.Wizard}
         >
           <span>imposta il calendario &#10230;</span>
-        </ViewSelectButton>
+        </ViewSelectionButton>
       </div>
     </section>
   );

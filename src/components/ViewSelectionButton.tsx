@@ -7,7 +7,7 @@ interface ButtonProps {
   children: React.ReactNode;
 }
 
-export default function ViewSelectButton({
+export default function ViewSelectionButton({
   targetView,
   className,
   children,
