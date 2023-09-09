@@ -46,7 +46,7 @@ export default function DayCell({ weekday }: Props) {
         ) : null}
       </div>
       {isWasteSelectionModalOpen &&
-        createPortal(<WasteSelectionModal fn={handleToggleWasteSelectionModal} />, document.body)}
+        createPortal(<WasteSelectionModal fn={handleToggleWasteSelectionModal} weekday={weekday.toLowerCase()} />, document.body)}
     </>
   );
 }
