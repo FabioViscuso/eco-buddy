@@ -2,11 +2,10 @@ import { useEffect } from "react";
 
 import "./index.css";
 import viewsStore, { Views } from "./state/viewsStore";
-import mainStore from "./state/store";
+import mainStore from "./state/mainStore";
 
-import NavigationBar from "./components/NavigationBar";
+import NavigationBar from "./components/UI/NavigationBar";
 import Welcome from "./components/views/Welcome";
-import Wizard from "./components/views/Wizard";
 import Calendar from "./components/views/Calendar";
 import Settings from "./components/views/Settings";
 
@@ -22,7 +21,6 @@ function App() {
   return (
     <>
       {view === Views.Welcome && <Welcome />}
-      {view === Views.Wizard && <Wizard />}
       {view === Views.Calendar && <Calendar />}
       {view === Views.Settings && <Settings />}
       <NavigationBar />

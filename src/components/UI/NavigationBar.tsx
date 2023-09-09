@@ -1,4 +1,4 @@
-import viewsStore, { Views } from "../state/viewsStore";
+import viewsStore, { Views } from "../../state/viewsStore";
 import ViewSelectionButton from "./ViewSelectionButton";
 
 export default function NavigationBar() {

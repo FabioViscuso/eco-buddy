@@ -1,5 +1,5 @@
-import { Views } from "../state/viewsStore";
-import useViewSelector from "../utils/useViewSelector";
+import { Views } from "../../state/viewsStore";
+import useViewSelector from "../../utils/useViewSelector";
 
 interface ButtonProps {
   targetView: Views;
