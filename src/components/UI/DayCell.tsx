@@ -1,4 +1,5 @@
-import uiStore from "../../state/uiStore";
+import { useState } from "react";
+import { createPortal } from "react-dom";
 import { WasteSelectionModal } from "./WasteSelectionModal";
 
 interface Props {
@@ -6,12 +7,10 @@ interface Props {
 }
 
 export default function DayCell({ weekday }: Props) {
-  const isWasteSelectionModalOpen = uiStore(
-    (state) => state.isWasteSelectionModalOpen
-  );
-  const setOpenWasteSelectionModal = uiStore(
-    (state) => state.setOpenWasteSelectionModal
-  );
+  const [isWasteSelectionModalOpen, setIsWasteSelectionModalOpen] = useState<boolean>(false)
+  const handleToggleWasteSelectionModal = () => {
+    setIsWasteSelectionModalOpen(!isWasteSelectionModalOpen);
+  }
 
   const today = new Date();
   const currentWeekday = today.toLocaleDateString("it-IT", { weekday: "long" });
@@ -23,19 +22,18 @@ export default function DayCell({ weekday }: Props) {
     weekday: "long",
   });
   const isTomorrow = tomorrowWeekday.toLowerCase() === weekday.toLowerCase();
-  
 
   return (
     <>
       <div
-        className={`relative [width:clamp(12rem,20vw,40rem)] p-4 flex flex-col gap-5 ${
+        className={`relative [width:clamp(16rem,20vw,40rem)] p-4 flex flex-col gap-5 ${
           isToday ? "bg-green-950" : isTomorrow ? "bg-green-800" : ""
         } border-green-700 border-2 rounded-md`}
       >
         <p>{weekday}</p>
         <div id={weekday} className="w-full flex">
           <button
-            onClick={setOpenWasteSelectionModal}
+            onClick={handleToggleWasteSelectionModal}
             className="p-3 ml-auto leading-[0.7] border-[#eee] border-2 rounded-full hover:border-green-400 hover:text-green-400 [filter:invert(0%)]"
           >
             +
@@ -47,7 +45,8 @@ export default function DayCell({ weekday }: Props) {
           <p className="absolute -top-7 left-0">Domani</p>
         ) : null}
       </div>
-      {isWasteSelectionModalOpen && <WasteSelectionModal />}
+      {isWasteSelectionModalOpen &&
+        createPortal(<WasteSelectionModal fn={handleToggleWasteSelectionModal} />, document.body)}
     </>
   );
 }
