@@ -1,32 +1,34 @@
+import icons from "./icons";
+
 const wasteTypes = [
   {
     type: "Carta/Cartone",
-    icon: '',
+    icon: icons.paper,
     bgColor: '#3D2B1F'
   },
   {
     type: "Vetro",
-    icon: '',
+    icon: icons.glass,
     bgColor: '#00416A'
   },
   {
     type: "Plastica",
-    icon: '',
+    icon: icons.plastic,
     bgColor: '#F7F7F7'
   },
   {
     type: "Metallo",
-    icon: '',
+    icon: icons.metal,
     bgColor: '#555555'
   },
   {
     type: "Organico",
-    icon: '',
+    icon: icons.organic,
     bgColor: '#004225'
   },
   {
     type: "Indifferenziato",
-    icon: '',
+    icon: icons.waste,
     bgColor: '#BEBFC5'
   }
 ]
