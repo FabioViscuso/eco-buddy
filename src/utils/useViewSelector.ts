@@ -13,7 +13,7 @@ const useViewSelector = () => {
         "data-nextview"
       ) as Views;
       setView(newView);
-      if (currentView === Views.Wizard && isFirstTime) {
+      if (currentView === Views.Calendar && isFirstTime) {
         setIsFirstTime(false);
       }
     },
