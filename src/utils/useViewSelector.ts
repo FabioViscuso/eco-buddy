@@ -1,4 +1,4 @@
-import userStore from "../state/store";
+import userStore from "../state/mainStore";
 import viewsStore, { Views } from "../state/viewsStore";
 
 const useViewSelector = () => {

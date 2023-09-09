@@ -5,7 +5,6 @@ export enum Views {
   Calendar = "calendar",
   Settings = "settings",
   Welcome = "welcome",
-  Wizard = "wizard"
 }
 
 interface State {
