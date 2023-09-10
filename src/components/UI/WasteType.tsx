@@ -1,4 +1,5 @@
-import calendarStore, { WasteType } from "../../state/useWeeklyCalendarStore"
+import weeklyCalendarStore, { WasteType } from "../../state/useWeeklyCalendarStore";
+import monthlyCalendarStore from "../../state/useMonthlyCalendarStore";
 import { DayOfWeek } from "../../utils/weekDays";
 interface Props {
   wasteType: WasteType;
@@ -8,16 +9,25 @@ interface Props {
   forWeekNumber?: number;
 }
 
-export default function WasteType({wasteType, bgColor, icon, forWeekday}: Props) {
-  const {calendarData, setCalendar, removeFromCalendar} = calendarStore();
+export default function WasteType({wasteType, bgColor, icon, forWeekday, forWeekNumber}: Props) {
+  const {calendarData, addToWeeklyCalendar, removeFromWeeklyCalendar} = weeklyCalendarStore();
+  const {monthlyCalendarData, addToMonthlyCalendar, removeFromMonthlyCalendar} = monthlyCalendarStore();
 
   function handleCalendarUpdate() {
-    if (calendarData[forWeekday].includes(wasteType)) {
-      removeFromCalendar(forWeekday, wasteType)
+    if (forWeekNumber) {
+      if (monthlyCalendarData[forWeekNumber][forWeekday].includes(wasteType)) {
+        removeFromMonthlyCalendar(forWeekNumber, forWeekday, wasteType)
+      }else {
+        addToMonthlyCalendar(forWeekNumber, forWeekday, wasteType)
+      }
     } else {
-      setCalendar(forWeekday, wasteType);
+      if (calendarData[forWeekday].includes(wasteType)) {
+        removeFromWeeklyCalendar(forWeekday, wasteType)
+      } else {
+        addToWeeklyCalendar(forWeekday, wasteType);
+      }
+      console.log(calendarData);
     }
-    console.log(calendarData);
   }
 
   return(
