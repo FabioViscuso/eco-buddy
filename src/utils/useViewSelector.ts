@@ -4,7 +4,6 @@ import viewsStore, { Views } from "../state/viewsStore";
 const useViewSelector = () => {
   const isFirstTime = userStore((state) => state.isFirstTime);
   const setIsFirstTime = userStore((state) => state.setIsFirstTime);
-  const currentView = viewsStore((state) => state.view);
   const setView = viewsStore((state) => state.setView);
 
   return {
@@ -13,7 +12,7 @@ const useViewSelector = () => {
         "data-nextview"
       ) as Views;
       setView(newView);
-      if (currentView === Views.Calendar && isFirstTime) {
+      if (newView === Views.Calendar && isFirstTime) {
         setIsFirstTime(false);
       }
     },
