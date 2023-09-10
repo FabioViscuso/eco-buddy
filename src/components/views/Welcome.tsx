@@ -1,4 +1,4 @@
-import { Views } from "../../state/viewsStore";
+import { Views } from "../../state/useViewsStore";
 import ViewSelectionButton from "../UI/ViewSelectionButton";
 
 export default function Welcome() {

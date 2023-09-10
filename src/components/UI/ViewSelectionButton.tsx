@@ -1,4 +1,4 @@
-import { Views } from "../../state/viewsStore";
+import { Views } from "../../state/useViewsStore";
 import useViewSelector from "../../utils/useViewSelector";
 
 interface ButtonProps {

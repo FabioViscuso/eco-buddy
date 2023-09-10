@@ -2,7 +2,7 @@ import { useState } from "react";
 import { createPortal } from "react-dom";
 import { WasteSelectionModal } from "./WasteSelectionModal";
 import { DayOfWeek } from "../../utils/weekDays";
-import calendarStore from "../../state/calendarStore";
+import calendarStore from "../../state/useWeeklyCalendarStore";
 import wasteTypes from "../../utils/wasteTypes";
 import WasteTypeThumbnail from "./WasteTypeThumbnail";
 

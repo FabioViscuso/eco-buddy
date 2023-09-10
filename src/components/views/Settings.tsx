@@ -1,5 +1,5 @@
-import viewsStore, { Views } from "../../state/viewsStore";
-import calendarStore from "../../state/calendarStore";
+import viewsStore, { Views } from "../../state/useViewsStore";
+import calendarStore from "../../state/useWeeklyCalendarStore";
 
 export default function Settings() {
   const context = Views.Settings;

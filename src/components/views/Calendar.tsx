@@ -1,4 +1,4 @@
-import { Views } from "../../state/viewsStore";
+import { Views } from "../../state/useViewsStore";
 import WeeklyCalendar from "../calendars/WeeklyCalendar";
 
 export default function Calendar() {

@@ -1,5 +1,5 @@
-import userStore from "../state/mainStore";
-import viewsStore, { Views } from "../state/viewsStore";
+import userStore from "../state/useMainStore";
+import viewsStore, { Views } from "../state/useViewsStore";
 
 const useViewSelector = () => {
   const isFirstTime = userStore((state) => state.isFirstTime);

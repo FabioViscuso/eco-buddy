@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 
 import "./index.css";
-import viewsStore, { Views } from "./state/viewsStore";
-import mainStore from "./state/mainStore";
+import viewsStore, { Views } from "./state/useViewsStore";
+import mainStore from "./state/useMainStore";
 
 import NavigationBar from "./components/UI/NavigationBar";
 import Welcome from "./components/views/Welcome";

@@ -1,4 +1,4 @@
-import { WasteType } from "../../state/calendarStore"
+import { WasteType } from "../../state/useWeeklyCalendarStore"
 
 interface Props {
   wasteType: WasteType,
