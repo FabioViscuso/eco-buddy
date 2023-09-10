@@ -23,7 +23,44 @@ const monthlyCalendarStore = create<State>()(
   devtools(
     persist(
       (set) => ({
-        monthlyCalendarData: {},
+        monthlyCalendarData: {
+          1: {
+            Lunedì: [],
+            Martedì: [],
+            Mercoledì: [],
+            Giovedì: [],
+            Venerdì: [],
+            Sabato: [],
+            Domenica: [],
+          },
+          2: {
+            Lunedì: [],
+            Martedì: [],
+            Mercoledì: [],
+            Giovedì: [],
+            Venerdì: [],
+            Sabato: [],
+            Domenica: [],
+          },
+          3: {
+            Lunedì: [],
+            Martedì: [],
+            Mercoledì: [],
+            Giovedì: [],
+            Venerdì: [],
+            Sabato: [],
+            Domenica: [],
+          },
+          4: {
+            Lunedì: [],
+            Martedì: [],
+            Mercoledì: [],
+            Giovedì: [],
+            Venerdì: [],
+            Sabato: [],
+            Domenica: [],
+          },
+        },
         addToMonthlyCalendar: (week, day, wasteType) => {
           set((state) => {
             const updatedMonthData = state.monthlyCalendarData[week] || {};
@@ -67,7 +104,44 @@ const monthlyCalendarStore = create<State>()(
         },
         resetMonthlyCalendar: () => {
           set({
-            monthlyCalendarData: {},
+            monthlyCalendarData: {
+              1: {
+                Lunedì: [],
+                Martedì: [],
+                Mercoledì: [],
+                Giovedì: [],
+                Venerdì: [],
+                Sabato: [],
+                Domenica: [],
+              },
+              2: {
+                Lunedì: [],
+                Martedì: [],
+                Mercoledì: [],
+                Giovedì: [],
+                Venerdì: [],
+                Sabato: [],
+                Domenica: [],
+              },
+              3: {
+                Lunedì: [],
+                Martedì: [],
+                Mercoledì: [],
+                Giovedì: [],
+                Venerdì: [],
+                Sabato: [],
+                Domenica: [],
+              },
+              4: {
+                Lunedì: [],
+                Martedì: [],
+                Mercoledì: [],
+                Giovedì: [],
+                Venerdì: [],
+                Sabato: [],
+                Domenica: [],
+              },
+            },
           });
         },
       }),

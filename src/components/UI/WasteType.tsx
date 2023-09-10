@@ -20,6 +20,7 @@ export default function WasteType({wasteType, bgColor, icon, forWeekday, forWeek
       }else {
         addToMonthlyCalendar(forWeekNumber, forWeekday, wasteType)
       }
+      console.log(monthlyCalendarData[forWeekNumber], forWeekNumber, forWeekday)
     } else {
       if (calendarData[forWeekday].includes(wasteType)) {
         removeFromWeeklyCalendar(forWeekday, wasteType)
