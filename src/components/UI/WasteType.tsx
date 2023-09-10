@@ -1,10 +1,11 @@
 import calendarStore, { WasteType } from "../../state/useWeeklyCalendarStore"
 import { DayOfWeek } from "../../utils/weekDays";
 interface Props {
-  wasteType: WasteType,
-  bgColor: string,
-  icon: any,
-  forWeekday: DayOfWeek
+  wasteType: WasteType;
+  bgColor: string;
+  icon: any;
+  forWeekday: DayOfWeek;
+  forWeekNumber?: number;
 }
 
 export default function WasteType({wasteType, bgColor, icon, forWeekday}: Props) {

@@ -8,9 +8,10 @@ import WasteTypeThumbnail from "./WasteTypeThumbnail";
 
 interface Props {
   weekday: DayOfWeek;
+  weekNumber?: number;
 }
 
-export default function DayCell({ weekday }: Props) {
+export default function DayCell({ weekday, weekNumber }: Props) {
   const { calendarData } = calendarStore();
   const [isWasteSelectionModalOpen, setIsWasteSelectionModalOpen] =
     useState<boolean>(false);
@@ -59,14 +60,14 @@ export default function DayCell({ weekday }: Props) {
         ) : null}
       </div>
       {isWasteSelectionModalOpen &&
-        createPortal(
+        (createPortal(
           <WasteSelectionModal
-            key={`weekday-${weekday}${Math.random()}`}
+            key={Math.floor(1000 + Math.random() * 9999)}
             fn={handleToggleWasteSelectionModal}
             weekday={weekday}
           />,
           document.body
-        )}
+        ))}
     </>
   );
 }
