@@ -6,31 +6,25 @@ export type WasteType = string;
 
 type State = {
   calendarData: Record<DayOfWeek, WasteType[]>;
-  setCalendar: (
-    day: DayOfWeek,
-    wasteType: WasteType
-  ) => void;
-  removeFromCalendar: (
-    day: DayOfWeek,
-    wasteType: WasteType
-  ) => void;
-  resetCalendar: () => void;
+  addToWeeklyCalendar: (day: DayOfWeek, wasteType: WasteType) => void;
+  removeFromWeeklyCalendar: (day: DayOfWeek, wasteType: WasteType) => void;
+  resetWeeklyCalendar: () => void;
 };
 
-const calendarStore = create<State>()(
+const weeklyCalendarStore = create<State>()(
   devtools(
     persist(
       (set) => ({
         calendarData: {
-          "Lunedì": [],
-          "Martedì": [],
-          "Mercoledì": [],
-          "Giovedì": [],
-          "Venerdì": [],
-          "Sabato": [],
-          "Domenica": [],
+          Lunedì: [],
+          Martedì: [],
+          Mercoledì: [],
+          Giovedì: [],
+          Venerdì: [],
+          Sabato: [],
+          Domenica: [],
         },
-        setCalendar: (day, wasteType) => {
+        addToWeeklyCalendar: (day, wasteType) => {
           set((state) => {
             const updatedCalendarData = {
               ...state.calendarData,
@@ -42,11 +36,13 @@ const calendarStore = create<State>()(
             };
           });
         },
-        removeFromCalendar: (day, wasteType) => {
+        removeFromWeeklyCalendar: (day, wasteType) => {
           set((state) => {
             const updatedCalendarData = {
               ...state.calendarData,
-              [day]: state.calendarData[day].filter((type) => type !== wasteType),
+              [day]: state.calendarData[day].filter(
+                (type) => type !== wasteType
+              ),
             };
 
             return {
@@ -54,16 +50,16 @@ const calendarStore = create<State>()(
             };
           });
         },
-        resetCalendar: () => {
+        resetWeeklyCalendar: () => {
           set({
             calendarData: {
-              "Lunedì": [],
-              "Martedì": [],
-              "Mercoledì": [],
-              "Giovedì": [],
-              "Venerdì": [],
-              "Sabato": [],
-              "Domenica": [],
+              Lunedì: [],
+              Martedì: [],
+              Mercoledì: [],
+              Giovedì: [],
+              Venerdì: [],
+              Sabato: [],
+              Domenica: [],
             },
           });
         },
@@ -76,4 +72,4 @@ const calendarStore = create<State>()(
   )
 );
 
-export default calendarStore;
+export default weeklyCalendarStore;
