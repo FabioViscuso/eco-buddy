@@ -1,34 +1,72 @@
 import { create } from "zustand";
 import { devtools, persist, createJSONStorage } from "zustand/middleware";
+import { DayOfWeek } from "../utils/weekDays";
 
-export enum CalendarTypes {
-  Monthly = "monthly",
-  Weekly = "weekly",
-}
+export type WasteType = string;
 
-export type CalendarWeek = {
-  monday: [],
-  tuesday: [],
-  wednesday: [],
-  thursday: [],
-  friday: [],
-  saturday: [],
-  sunday: [],
-}
-
-interface State {
-  calendarType: CalendarTypes | unknown;
-  calendarData: CalendarWeek | CalendarWeek[] | unknown;
-  setCalendarType: (newCalendar: CalendarTypes) => void;
-}
+type State = {
+  calendarData: Record<DayOfWeek, WasteType[]>;
+  setCalendar: (
+    day: DayOfWeek,
+    wasteType: WasteType
+  ) => void;
+  removeFromCalendar: (
+    day: DayOfWeek,
+    wasteType: WasteType
+  ) => void;
+  resetCalendar: () => void;
+};
 
 const calendarStore = create<State>()(
   devtools(
     persist(
       (set) => ({
-        calendarType: null,
-        calendarData: null,
-        setCalendarType: (newCalendarType) => set({ calendarType: newCalendarType }),
+        calendarData: {
+          "Lunedì": [],
+          "Martedì": [],
+          "Mercoledì": [],
+          "Giovedì": [],
+          "Venerdì": [],
+          "Sabato": [],
+          "Domenica": [],
+        },
+        setCalendar: (day, wasteType) => {
+          set((state) => {
+            const updatedCalendarData = {
+              ...state.calendarData,
+              [day]: [...state.calendarData[day], wasteType],
+            };
+
+            return {
+              calendarData: updatedCalendarData,
+            };
+          });
+        },
+        removeFromCalendar: (day, wasteType) => {
+          set((state) => {
+            const updatedCalendarData = {
+              ...state.calendarData,
+              [day]: state.calendarData[day].filter((type) => type !== wasteType),
+            };
+
+            return {
+              calendarData: updatedCalendarData,
+            };
+          });
+        },
+        resetCalendar: () => {
+          set({
+            calendarData: {
+              "Lunedì": [],
+              "Martedì": [],
+              "Mercoledì": [],
+              "Giovedì": [],
+              "Venerdì": [],
+              "Sabato": [],
+              "Domenica": [],
+            },
+          });
+        },
       }),
       {
         name: "calendarState",

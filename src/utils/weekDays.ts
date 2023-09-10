@@ -1,4 +1,13 @@
-const daysOfWeek = [
+export type DayOfWeek =
+   "Lunedì"
+  | "Martedì"
+  | "Mercoledì"
+  | "Giovedì"
+  | "Venerdì"
+  | "Sabato"
+  | "Domenica";
+
+export const daysOfWeek = [
   "Lunedì",
   "Martedì",
   "Mercoledì",
@@ -7,5 +16,3 @@ const daysOfWeek = [
   "Sabato",
   "Domenica",
 ];
-
-export default daysOfWeek;

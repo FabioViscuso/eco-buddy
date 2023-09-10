@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { createPortal } from "react-dom";
 import { WasteSelectionModal } from "./WasteSelectionModal";
+import { DayOfWeek } from "../../utils/weekDays";
 
 interface Props {
-  weekday: string;
+  weekday: DayOfWeek;
 }
 
 export default function DayCell({ weekday }: Props) {
@@ -46,7 +47,7 @@ export default function DayCell({ weekday }: Props) {
         ) : null}
       </div>
       {isWasteSelectionModalOpen &&
-        createPortal(<WasteSelectionModal fn={handleToggleWasteSelectionModal} weekday={weekday.toLowerCase()} />, document.body)}
+        createPortal(<WasteSelectionModal key={`weekda-${weekday}${Math.random()}`} fn={handleToggleWasteSelectionModal} weekday={weekday} />, document.body)}
     </>
   );
 }
