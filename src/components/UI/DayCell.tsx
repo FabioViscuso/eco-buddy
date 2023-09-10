@@ -65,6 +65,7 @@ export default function DayCell({ weekday, weekNumber }: Props) {
             key={Math.floor(1000 + Math.random() * 9999)}
             fn={handleToggleWasteSelectionModal}
             weekday={weekday}
+            weekNumber={weekNumber}
           />,
           document.body
         ))}
