@@ -69,7 +69,7 @@ const calendarStore = create<State>()(
         },
       }),
       {
-        name: "calendarState",
+        name: "weeklyCalendarState",
         storage: createJSONStorage(() => localStorage),
       }
     )
