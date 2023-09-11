@@ -2,9 +2,7 @@ import { useState } from "react";
 import { createPortal } from "react-dom";
 import { WasteSelectionModal } from "./WasteSelectionModal";
 import { DayOfWeek } from "../../utils/weekDays";
-import calendarStore from "../../state/useWeeklyCalendarStore";
-import wasteTypes from "../../utils/wasteTypes";
-import WasteTypeThumbnail from "./WasteTypeThumbnail";
+import WasteTypesList from "./WasteTypesList";
 
 interface Props {
   weekday: DayOfWeek;
@@ -12,7 +10,6 @@ interface Props {
 }
 
 export default function DayCell({ weekday, weekNumber }: Props) {
-  const { calendarData } = calendarStore();
   const [isWasteSelectionModalOpen, setIsWasteSelectionModalOpen] =
     useState<boolean>(false);
   const handleToggleWasteSelectionModal = () => {
@@ -39,13 +36,7 @@ export default function DayCell({ weekday, weekNumber }: Props) {
       >
         <p>{weekday}</p>
         <div id={weekday} className="w-full flex">
-          {calendarData[weekday].map((wasteType) => (
-            <WasteTypeThumbnail
-              key={`wastetype-${Math.random()}`}
-              wasteType={wasteType}
-              bgColor={wasteTypes.find(type => type.type === wasteType)!.bgColor}
-            />
-          ))}
+          <WasteTypesList weekday={weekday} weekNumber={weekNumber} />
           <button
             onClick={handleToggleWasteSelectionModal}
             className="p-3 ml-auto leading-[0.7] border-[#eee] border-2 rounded-full hover:border-green-400 hover:text-green-400 [filter:invert(0%)]"
