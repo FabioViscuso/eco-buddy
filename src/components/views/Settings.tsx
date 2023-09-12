@@ -18,6 +18,7 @@ export default function Settings() {
     resetWeeklyCalendar();
     resetMonthlyCalendar();
     resetMainState();
+    setCloseSettingsModal();
     setView(Views.Welcome);
   }
 
