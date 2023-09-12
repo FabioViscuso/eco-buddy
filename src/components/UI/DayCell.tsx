@@ -78,7 +78,7 @@ export default function DayCell({ weekday, weekNumber }: Props) {
   return (
     <>
       <div
-        className={`relative [width:clamp(16rem,20vw,40rem)] p-4 flex flex-col gap-5 ${
+        className={`relative [width:clamp(16rem,15vw,30rem)] p-4 flex flex-col gap-5 ${
           isToday && isOfCurrentWeek(today, tomorrow, weekNumber)
             ? "bg-green-950"
             : isTomorrow && isOfCurrentWeek(today, tomorrow, weekNumber)
