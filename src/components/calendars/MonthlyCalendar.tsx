@@ -3,9 +3,11 @@ import DayCell from "../UI/DayCell";
 
 export default function MonthlyCalendar() {
   return (
-    <div className="h-[100dvh] w-full flex flex-col items-center gap-8 overflow-y-auto snap-y snap-mandatory">
-      <div className="min-h-screen flex-none snap-start w-full py-12">
-        <p className="text-center mb-16">Settimana 1</p>
+    <div className="h-[100dvh] w-[100vw] flex md:flex-col items-center gap-8 overflow-x-auto md:overflow-y-auto snap-x md:snap-y snap-mandatory">
+      <div className="relative h-[100dvh] flex-none snap-start w-full py-10">
+        <p className="sticky top-0 z-20 text-center w-full mx-auto mb-16 p-2 bg-[#242424] bg-opacity-70 backdrop-blur-sm">
+          Settimana 1
+        </p>
         <div className="w-full p-4 grid grid-flow-row grid-cols-[repeat(auto-fit,minmax(250px,1fr))] gap-10 justify-center justify-items-center">
           {daysOfWeek.map((weekday, index) => (
             <DayCell
@@ -17,8 +19,8 @@ export default function MonthlyCalendar() {
         </div>
       </div>
 
-      <div className="min-h-screen flex-none snap-start w-full py-10">
-        <p className="text-center mb-16">Settimana 2</p>
+      <div className="relative h-[100dvh] flex-none snap-start w-full py-10">
+        <p className="sticky top-0 z-20 text-center w-full mx-auto mb-16 p-2 bg-[#242424] bg-opacity-70 backdrop-blur-sm">Settimana 2</p>
         <div className="w-full p-4 grid grid-flow-row grid-cols-[repeat(auto-fit,minmax(250px,1fr))] gap-10 justify-center justify-items-center">
           {daysOfWeek.map((weekday, index) => (
             <DayCell
@@ -30,8 +32,8 @@ export default function MonthlyCalendar() {
         </div>
       </div>
 
-      <div className="min-h-screen flex-none snap-start w-full py-20">
-        <p className="text-center mb-16">Settimana 3</p>
+      <div className="relative h-[100dvh] flex-none snap-start w-full py-10">
+        <p className="sticky top-0 z-20 text-center w-full mx-auto mb-16 p-2 bg-[#242424] bg-opacity-70 backdrop-blur-sm">Settimana 3</p>
         <div className="w-full p-4 grid grid-flow-row grid-cols-[repeat(auto-fit,minmax(250px,1fr))] gap-10 justify-center justify-items-center">
           {daysOfWeek.map((weekday, index) => (
             <DayCell
@@ -43,8 +45,8 @@ export default function MonthlyCalendar() {
         </div>
       </div>
 
-      <div className="min-h-screen flex-none snap-start w-full py-10">
-        <p className="text-center mb-16">Settimana 4</p>
+      <div className="relative h-[100dvh] flex-none snap-start w-full py-10">
+        <p className="sticky top-0 z-20 text-center w-full mx-auto mb-16 p-2 bg-[#242424] bg-opacity-70 backdrop-blur-sm">Settimana 4</p>
         <div className="w-full p-4 grid grid-flow-row grid-cols-[repeat(auto-fit,minmax(250px,1fr))] gap-10 justify-center justify-items-center">
           {daysOfWeek.map((weekday, index) => (
             <DayCell
