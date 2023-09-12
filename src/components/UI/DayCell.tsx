@@ -96,9 +96,9 @@ export default function DayCell({ weekday, weekNumber }: Props) {
             +
           </button>
         </div>
-        {isToday ? (
+        {isToday && isOfCurrentWeek(today, tomorrow, weekNumber) ? (
           <p className="absolute -top-7 left-0">Oggi</p>
-        ) : isTomorrow ? (
+        ) : isTomorrow && isOfCurrentWeek(today, tomorrow, weekNumber) ? (
           <p className="absolute -top-7 left-0">Domani</p>
         ) : null}
       </div>
