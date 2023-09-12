@@ -2,6 +2,7 @@ import viewsStore, { Views } from "../../state/useViewsStore";
 import weeklyCalendarStore from "../../state/useWeeklyCalendarStore";
 import monthlyCalendarStore from "../../state/useMonthlyCalendarStore";
 import mainStore from "../../state/useMainStore";
+import uiStore from "../../state/useUIStore";
 
 export default function Settings() {
   const context = Views.Settings;
@@ -9,6 +10,7 @@ export default function Settings() {
   const { resetWeeklyCalendar } = weeklyCalendarStore();
   const { resetMonthlyCalendar } = monthlyCalendarStore();
   const { resetMainState } = mainStore();
+  const { setCloseSettingsModal } = uiStore();
 
   function handleResetSettings() {
     localStorage.clear();
@@ -22,9 +24,17 @@ export default function Settings() {
   return (
     <section
       id={`section-${context}`}
-      className="h-full w-full flex flex-col justify-center items-center gap-10"
+      className="fixed top-0 h-[100dvh] left-0 z-50 w-full flex flex-col justify-center items-center gap-10 bg-opacity-60 backdrop-blur-md"
     >
-      <button onClick={handleResetSettings}>Reimposta l'applicazione</button>
+      <div className="relative h-full w-full flex flex-col justify-center items-center gap-5">
+        <button
+          onClick={() => setCloseSettingsModal()}
+          className="absolute top-10 right-10 bg-red-500 rounded-md py-2 px-4 "
+        >
+          Chiudi X
+        </button>
+        <button onClick={handleResetSettings} className="bg-red-500 rounded-md py-2 px-4">Reimposta l'applicazione</button>
+      </div>
     </section>
   );
 }

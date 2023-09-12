@@ -1,28 +1,12 @@
-import viewsStore, { Views } from "../../state/useViewsStore";
-import ViewSelectionButton from "./ViewSelectionButton";
-
+import uiStore from "../../state/useUIStore";
 export default function NavigationBar() {
-  const context = viewsStore((state) => state.view);
+  const {setOpenSettingsModal} = uiStore();
+
   return (
-    <nav className="fixed bottom-0 left-0 right-5 h-12 flex justify-center items-center gap-10 backdrop-blur-sm">
-      <ViewSelectionButton
-        className={`text-green-600`}
-        targetView={Views.Calendar}
-      >
-        <span className="no-underline ">🗓️&nbsp;</span>
-        <span className={`${context === Views.Calendar && "underline"}`}>
-          Calendario
-        </span>
-      </ViewSelectionButton>
-      <ViewSelectionButton
-        className={`text-green-600`}
-        targetView={Views.Settings}
-      >
-        <span className="no-underline">⚙️&nbsp;</span>
-        <span className={`${context === Views.Settings && "underline"}`}>
-          Impostazioni
-        </span>
-      </ViewSelectionButton>
+    <nav className="fixed top-10 right-10 z-40 h-12 flex justify-center items-center gap-10 backdrop-blur-sm">
+      <button onClick={() => setOpenSettingsModal()}>
+        <span className="text-3xl">⚙️&nbsp;</span>
+      </button>
     </nav>
   );
 }
