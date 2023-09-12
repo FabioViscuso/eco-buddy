@@ -5,7 +5,7 @@ import viewsStore, { Views } from "./state/useViewsStore";
 import mainStore from "./state/useMainStore";
 import uiStore from "./state/useUIStore";
 
-import NavigationBar from "./components/UI/NavigationBar";
+import SettingsButton from "./components/UI/SettingsButton";
 import Welcome from "./components/views/Welcome";
 import Calendar from "./components/views/Calendar";
 import Settings from "./components/views/Settings";
@@ -25,7 +25,7 @@ function App() {
       {view === Views.Welcome && <Welcome />}
       {view === Views.Calendar && <Calendar />}
       {isSettingsModalOpen && <Settings />}
-      <NavigationBar />
+      {view !== Views.Welcome && <SettingsButton />}
     </>
   );
 }
