@@ -2,17 +2,17 @@ import { create } from "zustand";
 import { devtools } from "zustand/middleware";
 
 interface State {
-  isWasteSelectionModalOpen: boolean;
-  setOpenWasteSelectionModal: () => void;
-  setCloseWasteSelectionModal: () => void;
+  isSettingsModalOpen: boolean;
+  setOpenSettingsModal: () => void;
+  setCloseSettingsModal: () => void;
 }
 
 const uiStore = create<State>()(
   devtools(
       (set) => ({
-        isWasteSelectionModalOpen: false,
-        setOpenWasteSelectionModal: () => set({isWasteSelectionModalOpen: true}),
-        setCloseWasteSelectionModal: () => set({isWasteSelectionModalOpen: false})
+        isSettingsModalOpen: false,
+        setOpenSettingsModal: () => set({isSettingsModalOpen: true}),
+        setCloseSettingsModal: () => set({isSettingsModalOpen: false})
       })
   )
 );

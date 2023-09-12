@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import "./index.css";
 import viewsStore, { Views } from "./state/useViewsStore";
 import mainStore from "./state/useMainStore";
+import uiStore from "./state/useUIStore";
 
 import NavigationBar from "./components/UI/NavigationBar";
 import Welcome from "./components/views/Welcome";
@@ -13,6 +14,7 @@ function App() {
   const view = viewsStore(state => state.view);
   const isFirstTime = mainStore(state => state.isFirstTime);
   const setView = viewsStore(state => state.setView);
+  const {isSettingsModalOpen} = uiStore();
 
   useEffect(() => {
     if (isFirstTime) { setView(Views.Welcome) }
@@ -22,7 +24,7 @@ function App() {
     <>
       {view === Views.Welcome && <Welcome />}
       {view === Views.Calendar && <Calendar />}
-      {view === Views.Settings && <Settings />}
+      {isSettingsModalOpen && <Settings />}
       <NavigationBar />
     </>
   );
