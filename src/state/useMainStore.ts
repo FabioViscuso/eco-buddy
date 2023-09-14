@@ -3,9 +3,7 @@ import { devtools, persist, createJSONStorage } from "zustand/middleware";
 
 type State = {
   isFirstTime: boolean;
-  preferredCalendar: string;
   setIsFirstTime: (flag: boolean) => void;
-  setPreferredCalendar: (preference: string) => void;
   resetMainState: () => void;
 }
 
@@ -14,10 +12,8 @@ const mainStore = create<State>()(
     persist(
       (set) => ({
         isFirstTime: true,
-        preferredCalendar: '',
         setIsFirstTime: (flag) => set({ isFirstTime: flag }),
-        setPreferredCalendar: (preference) => set({ preferredCalendar: preference}),
-        resetMainState: () => set({preferredCalendar: '', isFirstTime: true}),
+        resetMainState: () => set({ isFirstTime: true}),
       }),
       {
         name: "appState",

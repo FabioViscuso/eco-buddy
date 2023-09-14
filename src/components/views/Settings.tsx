@@ -1,6 +1,5 @@
 import viewsStore, { Views } from "../../state/useViewsStore";
 import weeklyCalendarStore from "../../state/useWeeklyCalendarStore";
-import monthlyCalendarStore from "../../state/useMonthlyCalendarStore";
 import mainStore from "../../state/useMainStore";
 import uiStore from "../../state/useUIStore";
 
@@ -8,7 +7,6 @@ export default function Settings() {
   const context = Views.Settings;
   const setView = viewsStore((state) => state.setView);
   const { resetWeeklyCalendar } = weeklyCalendarStore();
-  const { resetMonthlyCalendar } = monthlyCalendarStore();
   const { resetMainState } = mainStore();
   const { setCloseSettingsModal } = uiStore();
 
@@ -16,7 +14,6 @@ export default function Settings() {
     localStorage.clear();
     sessionStorage.clear();
     resetWeeklyCalendar();
-    resetMonthlyCalendar();
     resetMainState();
     setCloseSettingsModal();
     setView(Views.Welcome);

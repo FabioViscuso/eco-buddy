@@ -4,32 +4,32 @@ const wasteTypes = [
   {
     type: "Carta/Cartone",
     icon: icons.paper,
-    bgColor: '#3D2B1F'
+    bgColor: '#EFDECD'
   },
   {
     type: "Vetro",
     icon: icons.glass,
-    bgColor: '#00416A'
+    bgColor: '#B9D9EB'
   },
   {
     type: "Plastica",
     icon: icons.plastic,
-    bgColor: '#F7F7F7'
+    bgColor: '#F5F5DC'
   },
   {
     type: "Metallo",
     icon: icons.metal,
-    bgColor: '#555555'
+    bgColor: '#E5E4E2'
   },
   {
     type: "Organico",
     icon: icons.organic,
-    bgColor: '#004225'
+    bgColor: '#ACE1AF'
   },
   {
     type: "Indifferenziato",
     icon: icons.waste,
-    bgColor: '#BEBFC5'
+    bgColor: '#FEFEFA'
   }
 ]
 

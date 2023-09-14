@@ -6,16 +6,14 @@ import WasteTypesList from "./WasteTypesList";
 
 interface Props {
   weekday: DayOfWeek;
-  weekNumber?: number;
 }
 
-export default function DayCell({ weekday, weekNumber }: Props) {
+export default function DayCell({ weekday }: Props) {
   const [isWasteSelectionModalOpen, setIsWasteSelectionModalOpen] =
     useState<boolean>(false);
   const handleToggleWasteSelectionModal = () => {
     setIsWasteSelectionModalOpen(!isWasteSelectionModalOpen);
   };
-
   const today = new Date();
   const currentWeekday = today.toLocaleDateString("it-IT", { weekday: "long" });
   const isToday = currentWeekday.toLowerCase() === weekday.toLowerCase();
@@ -27,78 +25,31 @@ export default function DayCell({ weekday, weekNumber }: Props) {
   });
   const isTomorrow = tomorrowWeekday.toLowerCase() === weekday.toLowerCase();
 
-  const isOfCurrentWeek = (
-    today: Date,
-    tomorrow: Date,
-    weekNumber: number | undefined
-  ) => {
-    const todayAsDayNumber = today.getDate();
-    const tomorrowAsNumber = tomorrow.getDate();
-    if (!weekNumber) {
-      return true;
-    }
-    if (
-      weekNumber === 1 &&
-      todayAsDayNumber >= 1 &&
-      todayAsDayNumber <= 7 &&
-      tomorrowAsNumber >= 1 &&
-      tomorrowAsNumber <= 7
-    ) {
-      return true;
-    }
-    if (
-      weekNumber === 2 &&
-      todayAsDayNumber >= 8 &&
-      todayAsDayNumber <= 14 &&
-      tomorrowAsNumber >= 8 &&
-      tomorrowAsNumber <= 14
-    ) {
-      return true;
-    }
-    if (
-      weekNumber === 3 &&
-      todayAsDayNumber >= 15 &&
-      todayAsDayNumber <= 21 &&
-      tomorrowAsNumber >= 15 &&
-      tomorrowAsNumber <= 21
-    ) {
-      return true;
-    }
-    if (
-      weekNumber === 4 &&
-      todayAsDayNumber >= 22 &&
-      todayAsDayNumber <= 28 &&
-      tomorrowAsNumber >= 22 &&
-      tomorrowAsNumber <= 28
-    ) {
-      return true;
-    }
-  };
-
   return (
     <>
       <div
+        onClick={handleToggleWasteSelectionModal}
         className={`relative [width:clamp(16rem,15vw,30rem)] p-4 flex flex-col gap-5 ${
-          isToday && isOfCurrentWeek(today, tomorrow, weekNumber)
+          isToday
             ? "bg-green-950"
-            : isTomorrow && isOfCurrentWeek(today, tomorrow, weekNumber)
+            : isTomorrow
             ? "bg-green-800"
             : ""
-        } border-green-700 border-2 rounded-md`}
+        } border-green-700 border-2 rounded-md hover:[box-shadow:0px_0px_6px_2px_#227744] hover:cursor-pointer`}
       >
         <p>{weekday}</p>
-        <div id={weekday} className="w-full flex">
-          <WasteTypesList weekday={weekday} weekNumber={weekNumber} />
+        <div id={weekday} className="w-full flex gap-2">
+          <WasteTypesList weekday={weekday} />
           <button
             onClick={handleToggleWasteSelectionModal}
-            className="p-3 ml-auto leading-[0.7] border-[#eee] border-2 rounded-full hover:border-green-400 hover:text-green-400 [filter:invert(0%)]"
+            className="relative p-3 ml-auto h-12 w-12 border-[#eee] border-2 rounded-full hover:border-green-400 hover:text-green-400 [filter:invert(0%)]"
           >
-            +
+            <span className="absolute -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 text-2xl -mt-1">+</span>
           </button>
         </div>
-        {isToday && isOfCurrentWeek(today, tomorrow, weekNumber) ? (
+        {isToday ? (
           <p className="absolute -top-7 left-0">Oggi</p>
-        ) : isTomorrow && isOfCurrentWeek(today, tomorrow, weekNumber) ? (
+        ) : isTomorrow ? (
           <p className="absolute -top-7 left-0">Domani</p>
         ) : null}
       </div>
@@ -108,7 +59,6 @@ export default function DayCell({ weekday, weekNumber }: Props) {
             key={Math.floor(1000 + Math.random() * 9999)}
             fn={handleToggleWasteSelectionModal}
             weekday={weekday}
-            weekNumber={weekNumber}
           />,
           document.body
         )}
