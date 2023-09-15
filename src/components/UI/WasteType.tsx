@@ -1,6 +1,6 @@
 import weeklyCalendarStore, {
   WasteType,
-} from "../../state/useWeeklyCalendarStore";
+} from "../../state/useCalendarStore";
 import { DayOfWeek } from "../../utils/weekDays";
 import AddRemoveIcon from "./AddRemoveIcon";
 interface Props {
@@ -17,18 +17,18 @@ export default function WasteType({
   icon,
   forWeekday,
 }: Props) {
-  const { calendarData, addToWeeklyCalendar, removeFromWeeklyCalendar } =
+  const { CalendarData, addToCalendar, removeFromCalendar } =
     weeklyCalendarStore();
   const isWasteTypePresentInWeeklyCalendar =
-    calendarData[forWeekday].includes(wasteType);
+  CalendarData[forWeekday].includes(wasteType);
 
   function handleCalendarUpdate() {
-    if (calendarData[forWeekday].includes(wasteType)) {
-      removeFromWeeklyCalendar(forWeekday, wasteType);
+    if (CalendarData[forWeekday].includes(wasteType)) {
+      removeFromCalendar(forWeekday, wasteType);
     } else {
-      addToWeeklyCalendar(forWeekday, wasteType);
+      addToCalendar(forWeekday, wasteType);
     }
-    console.log(calendarData);
+    console.log(CalendarData);
   }
 
   return (

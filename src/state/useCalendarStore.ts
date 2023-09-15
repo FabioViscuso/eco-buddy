@@ -5,17 +5,17 @@ import { DayOfWeek } from "../utils/weekDays";
 export type WasteType = string;
 
 type State = {
-  calendarData: Record<DayOfWeek, WasteType[]>;
-  addToWeeklyCalendar: (day: DayOfWeek, wasteType: WasteType) => void;
-  removeFromWeeklyCalendar: (day: DayOfWeek, wasteType: WasteType) => void;
-  resetWeeklyCalendar: () => void;
+  CalendarData: Record<DayOfWeek, WasteType[]>;
+  addToCalendar: (day: DayOfWeek, wasteType: WasteType) => void;
+  removeFromCalendar: (day: DayOfWeek, wasteType: WasteType) => void;
+  resetCalendar: () => void;
 };
 
-const weeklyCalendarStore = create<State>()(
+const CalendarStore = create<State>()(
   devtools(
     persist(
       (set) => ({
-        calendarData: {
+        CalendarData: {
           Lunedì: [],
           Martedì: [],
           Mercoledì: [],
@@ -24,35 +24,35 @@ const weeklyCalendarStore = create<State>()(
           Sabato: [],
           Domenica: [],
         },
-        addToWeeklyCalendar: (day, wasteType) => {
+        addToCalendar: (day, wasteType) => {
           set((state) => {
             const updatedCalendarData = {
-              ...state.calendarData,
-              [day]: [...state.calendarData[day], wasteType],
+              ...state.CalendarData,
+              [day]: [...state.CalendarData[day], wasteType],
             };
 
             return {
-              calendarData: updatedCalendarData,
+              CalendarData: updatedCalendarData,
             };
           });
         },
-        removeFromWeeklyCalendar: (day, wasteType) => {
+        removeFromCalendar: (day, wasteType) => {
           set((state) => {
             const updatedCalendarData = {
-              ...state.calendarData,
-              [day]: state.calendarData[day].filter(
+              ...state.CalendarData,
+              [day]: state.CalendarData[day].filter(
                 (type) => type !== wasteType
               ),
             };
 
             return {
-              calendarData: updatedCalendarData,
+              CalendarData: updatedCalendarData,
             };
           });
         },
-        resetWeeklyCalendar: () => {
+        resetCalendar: () => {
           set({
-            calendarData: {
+            CalendarData: {
               Lunedì: [],
               Martedì: [],
               Mercoledì: [],
@@ -65,11 +65,11 @@ const weeklyCalendarStore = create<State>()(
         },
       }),
       {
-        name: "weeklyCalendarState",
+        name: "CalendarState",
         storage: createJSONStorage(() => localStorage),
       }
     )
   )
 );
 
-export default weeklyCalendarStore;
+export default CalendarStore;

@@ -11,7 +11,7 @@ export default defineConfig({
       name: 'Eco Buddy: Calendario per la raccolta differenziata',
       short_name: 'Eco Buddy',
       description: 'App per la creazione di un calendario di raccolta settimanale o mensile, con promemoria tramite notifiche push',
-      theme_color: '#ffffff',
+      theme_color: '#15803D',
       icons: [
         {
           src: 'pwa-192x192.png',
