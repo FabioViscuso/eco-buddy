@@ -3,17 +3,31 @@ import { devtools, persist, createJSONStorage } from "zustand/middleware";
 
 type State = {
   isFirstTime: boolean;
+  isNotificationAllowed: boolean;
+  notificationHour: number;
   setIsFirstTime: (flag: boolean) => void;
+  setIsNotificationAllowed: (flag: boolean) => void;
+  setNotificationHour: (hour: number) => void;
   resetMainState: () => void;
-}
+};
 
 const mainStore = create<State>()(
   devtools(
     persist(
       (set) => ({
         isFirstTime: true,
+        isNotificationAllowed: false,
+        notificationHour: new Date().setHours(21, 0, 0),
         setIsFirstTime: (flag) => set({ isFirstTime: flag }),
-        resetMainState: () => set({ isFirstTime: true}),
+        setIsNotificationAllowed: (flag) =>
+          set({ isNotificationAllowed: flag }),
+        setNotificationHour: (hour) => set({ notificationHour: hour }),
+        resetMainState: () =>
+          set({
+            isFirstTime: true,
+            isNotificationAllowed: false,
+            notificationHour: new Date().setHours(21, 0, 0),
+          }),
       }),
       {
         name: "appState",
