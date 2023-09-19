@@ -33,6 +33,16 @@ self.addEventListener("activate", (event) => {
   });
 });
 
+const now = new Date();
+const notificationTime = JSON.parse(localStorage.getItem('appState')).state.notificationHour;
+const timeUntilNotification = notificationTime - now.getHours();
+
+if (timeUntilNotification > 0) {
+  setTimeout(() => {
+    self.registration.showNotification(title, options);
+  }, timeUntilNotification);
+}
+
 if (Notification.permission === "granted") {
   self.addEventListener("push", (event) => {
     const title = "Promemoria";
