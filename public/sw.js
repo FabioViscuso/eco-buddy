@@ -33,17 +33,14 @@ self.addEventListener("activate", (event) => {
   });
 });
 
-const now = new Date();
-const notificationTime = JSON.parse(localStorage.getItem('appState')).state.notificationHour;
-const timeUntilNotification = notificationTime - now.getHours();
-
-if (timeUntilNotification > 0) {
-  setTimeout(() => {
-    self.registration.showNotification(title, options);
-  }, timeUntilNotification);
-}
-
 if (Notification.permission === "granted") {
+  let notificationHour = 0;
+
+  self.onmessage = (message) => {
+    notificationHour = message.data.hour;
+    storeNotificationHour(notificationHour); // Store the hour in IndexedDB
+  };
+
   self.addEventListener("push", (event) => {
     const title = "Promemoria";
     const options = {
@@ -52,4 +49,36 @@ if (Notification.permission === "granted") {
 
     event.waitUntil(self.registration.showNotification(title, options));
   });
+
+  function storeNotificationHour(hour) {
+    indexedDB.open("notificationDB", 1).onupgradeneeded = function(event) {
+      const db = event.target.result;
+      db.createObjectStore("settings");
+    };
+
+    indexedDB.open("notificationDB", 1).onsuccess = function(event) {
+      const db = event.target.result;
+      const transaction = db.transaction(["settings"], "readwrite");
+      const store = transaction.objectStore("settings");
+      store.put(hour, "notificationHour");
+    }
+  }
+
+  function loadNotificationHour() {
+    indexedDB.open("notificationDB", 1).onsuccess = function(event) {
+      const db = event.target.result;
+      const transaction = db.transaction(["settings"], "readonly");
+      const store = transaction.objectStore("settings");
+      const request = store.get("notificationHour");
+
+      request.onsuccess = function(event) {
+        if (request.result !== undefined) {
+          notificationHour = request.result;
+        }
+      }
+    }
+  }
+
+  loadNotificationHour(); // Load the hour from IndexedDB
+  setInterval(checkNotification, 60 * 60 * 1000); // Check for notification every hour
 }

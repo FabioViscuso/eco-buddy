@@ -26,7 +26,7 @@ const mainStore = create<State>()(
           set({
             isFirstTime: true,
             isNotificationAllowed: false,
-            notificationHour: new Date().setHours(21, 0, 0),
+            notificationHour: 21,
           }),
       }),
       {
