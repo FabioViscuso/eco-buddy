@@ -4,10 +4,22 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Calendario della raccolta differenziata">
+    <link rel="apple-touch-icon" href="/apple-touch-icon-180x180.png">
+    <link rel="manifest" href="/manifest.json">
     <title>Eco Buddy</title>
   </head>
   <body>
     <main id="root"></main>
     <script type="module" src="/src/main.tsx"></script>
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('./sw.js')
+            .then(registration => console.info('Success: ', registration.scope))
+            .catch(error => console.error('Failure :', error))
+        })
+      }
+    </script>
   </body>
 </html>
