@@ -10,7 +10,7 @@ interface State {
   resetSettingsState: () => void;
 }
 
-const mainStore = create<State>()(
+const settingsStore = create<State>()(
   devtools((set) => ({
     isNotificationAllowed: false,
     notificationHour: 21,
@@ -33,4 +33,4 @@ const mainStore = create<State>()(
   }))
 );
 
-export default mainStore;
+export default settingsStore;

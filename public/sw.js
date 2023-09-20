@@ -38,7 +38,7 @@ if (Notification.permission === "granted") {
 
   function checkNotification() {
     const currentHour = new Date().getHours();
-    if (currentHour >= notificationHour && Math.abs(currentHour - notificationHour) <= 2) {
+    if (currentHour >= notificationHour) {
       console.log("notification fired");
       const title = "Promemoria";
       const options = {
@@ -69,7 +69,7 @@ if (Notification.permission === "granted") {
       request.onsuccess = function () {
         if (request.result !== undefined) {
           notificationHour = request.result.value;
-          checkNotification(); // Now that you have the hour, check for notifications
+          checkNotification();
         }
       };
     };
@@ -77,6 +77,6 @@ if (Notification.permission === "granted") {
       console.error(err)
     }
   }
-  loadNotificationHour(); // Load the hour from IndexedDB
-  setInterval(loadNotificationHour, 60 * 60 * 1000); // Check for notification every hour
+  loadNotificationHour();
+  setInterval(loadNotificationHour, 60 * 60 * 1000);
 }
