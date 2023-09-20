@@ -1,20 +1,20 @@
 import viewsStore, { Views } from "../../state/useViewsStore";
 import calendarStore from "../../state/useCalendarStore";
-import mainStore from "../../state/useMainStore";
+import mainStore from "../../state/useSettingsStore";
 import uiStore from "../../state/useUIStore";
 
 export default function Settings() {
   const context = Views.Settings;
   const setView = viewsStore((state) => state.setView);
   const { resetCalendar } = calendarStore();
-  const { resetMainState } = mainStore();
+  const { resetSettingsState } = mainStore();
   const { setCloseSettingsModal } = uiStore();
 
   function handleResetSettings() {
     localStorage.clear();
     sessionStorage.clear();
     resetCalendar();
-    resetMainState();
+    resetSettingsState();
     setCloseSettingsModal();
     setView(Views.Welcome);
   }
