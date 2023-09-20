@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { Views } from "../../state/useViewsStore";
-import mainStore from "../../state/useMainStore";
+import mainStore from "../../state/useSettingsStore";
 import ViewSelectionButton from "../UI/ViewSelectionButton";
 
 export default function Welcome() {

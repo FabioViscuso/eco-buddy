@@ -2,7 +2,6 @@ import { useEffect } from "react";
 
 import "./index.css";
 import viewsStore, { Views } from "./state/useViewsStore";
-import mainStore from "./state/useMainStore";
 import uiStore from "./state/useUIStore";
 
 import SettingsButton from "./components/UI/SettingsButton";
@@ -12,7 +11,7 @@ import Settings from "./components/views/Settings";
 
 function App() {
   const view = viewsStore(state => state.view);
-  const isFirstTime = mainStore(state => state.isFirstTime);
+  const isFirstTime = uiStore(state => state.isFirstTime);
   const setView = viewsStore(state => state.setView);
   const {isSettingsModalOpen} = uiStore();
 

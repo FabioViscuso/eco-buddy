@@ -36,10 +36,18 @@ self.addEventListener("activate", (event) => {
 if (Notification.permission === "granted") {
   let notificationHour = 0;
 
-  self.onmessage = (message) => {
-    notificationHour = message.data.hour;
-    storeNotificationHour(notificationHour); // Store the hour in IndexedDB
-  };
+  function checkNotification() {
+    const currentHour = new Date().getHours();
+    if (currentHour >= notificationHour) {
+      console.log("notification fired");
+      const title = "Promemoria";
+      const options = {
+        body: "Non dimenticare di preparare il sacco della differenziata",
+      };
+  
+      self.registration.showNotification(title, options);
+    }
+  }
 
   self.addEventListener("push", (event) => {
     const title = "Promemoria";
@@ -50,35 +58,25 @@ if (Notification.permission === "granted") {
     event.waitUntil(self.registration.showNotification(title, options));
   });
 
-  function storeNotificationHour(hour) {
-    indexedDB.open("notificationDB", 1).onupgradeneeded = function(event) {
-      const db = event.target.result;
-      db.createObjectStore("settings");
-    };
-
-    indexedDB.open("notificationDB", 1).onsuccess = function(event) {
-      const db = event.target.result;
-      const transaction = db.transaction(["settings"], "readwrite");
-      const store = transaction.objectStore("settings");
-      store.put(hour, "notificationHour");
-    }
-  }
-
   function loadNotificationHour() {
-    indexedDB.open("notificationDB", 1).onsuccess = function(event) {
-      const db = event.target.result;
-      const transaction = db.transaction(["settings"], "readonly");
-      const store = transaction.objectStore("settings");
-      const request = store.get("notificationHour");
+    const request = indexedDB.open("appDatabase", 10);
 
-      request.onsuccess = function(event) {
+    request.onsuccess = function (event) {
+      const db = event.target.result;
+      const transaction = db.transaction(["appState"], "readonly");
+      const store = transaction.objectStore("appState");
+      const request = store.get("notificationHour");
+      request.onsuccess = function () {
         if (request.result !== undefined) {
-          notificationHour = request.result;
+          notificationHour = request.result.value;
+          checkNotification(); // Now that you have the hour, check for notifications
         }
-      }
+      };
+    };
+    request.onerror = function(err) {
+      console.error(err)
     }
   }
-
   loadNotificationHour(); // Load the hour from IndexedDB
-  setInterval(checkNotification, 60 * 60 * 1000); // Check for notification every hour
+  setInterval(loadNotificationHour, 60 * 60 * 1000); // Check for notification every hour
 }
