@@ -38,7 +38,7 @@ if (Notification.permission === "granted") {
 
   function checkNotification() {
     const currentHour = new Date().getHours();
-    if (currentHour >= notificationHour) {
+    if (currentHour >= notificationHour && Math.abs(currentHour - notificationHour) <= 2) {
       console.log("notification fired");
       const title = "Promemoria";
       const options = {

@@ -13,7 +13,7 @@ interface State {
 const mainStore = create<State>()(
   devtools((set) => ({
     isNotificationAllowed: false,
-    notificationHour: 13,
+    notificationHour: 21,
     setIsNotificationAllowed: async (flag) => {
       set({ isNotificationAllowed: flag });
       await dbInterface.setItem("isNotificationAllowed", flag);
@@ -25,10 +25,10 @@ const mainStore = create<State>()(
     resetSettingsState: async () => {
       set({
         isNotificationAllowed: false,
-        notificationHour: 13,
+        notificationHour: 21,
       });
       await dbInterface.setItem("isNotificationAllowed", false);
-      await dbInterface.setItem("notificationHour", 13);
+      await dbInterface.setItem("notificationHour", 21);
     },
   }))
 );
