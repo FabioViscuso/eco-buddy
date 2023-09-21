@@ -34,7 +34,35 @@ self.addEventListener("activate", (event) => {
 });
 
 if (Notification.permission === "granted") {
-  let notificationHour = 0;
+  self.addEventListener("periodicsync", (event) => {
+    if (event.tag === "trash-collection-check") {
+      event.waitUntil(loadNotificationHour());
+    }
+  });
+
+  function loadNotificationHour() {
+    const request = indexedDB.open("appDatabase", 10);
+
+    return new Promise((resolve, reject) => {
+      request.onsuccess = function (event) {
+        const db = event.target.result;
+        const transaction = db.transaction(["appState"], "readonly");
+        const store = transaction.objectStore("appState");
+        const request = store.get("notificationHour");
+        request.onsuccess = function () {
+          if (request.result !== undefined) {
+            notificationHour = request.result.value;
+            checkNotification();
+          }
+          resolve(); // Resolve the promise once the task is complete
+        };
+      };
+      request.onerror = function (err) {
+        console.error(err);
+        reject(err); // Reject the promise in case of an error
+      };
+    });
+  }
 
   function checkNotification() {
     const currentHour = new Date().getHours();
@@ -44,10 +72,12 @@ if (Notification.permission === "granted") {
       const options = {
         body: "Non dimenticare di preparare il sacco della differenziata",
       };
-  
+
       self.registration.showNotification(title, options);
     }
   }
+
+  let notificationHour = 0;
 
   self.addEventListener("push", (event) => {
     const title = "Promemoria";
@@ -58,25 +88,5 @@ if (Notification.permission === "granted") {
     event.waitUntil(self.registration.showNotification(title, options));
   });
 
-  function loadNotificationHour() {
-    const request = indexedDB.open("appDatabase", 10);
-
-    request.onsuccess = function (event) {
-      const db = event.target.result;
-      const transaction = db.transaction(["appState"], "readonly");
-      const store = transaction.objectStore("appState");
-      const request = store.get("notificationHour");
-      request.onsuccess = function () {
-        if (request.result !== undefined) {
-          notificationHour = request.result.value;
-          checkNotification();
-        }
-      };
-    };
-    request.onerror = function(err) {
-      console.error(err)
-    }
-  }
-  loadNotificationHour();
-  setInterval(loadNotificationHour, 60 * 60 * 1000);
+  loadNotificationHour(); // Initial load
 }

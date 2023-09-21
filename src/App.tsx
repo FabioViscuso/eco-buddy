@@ -28,6 +28,19 @@ function App() {
       setNotificationHour(savedNotificationHour);
       syncCalendar(localDBData);
     })()
+
+    if ('periodicSync' in navigator) {
+      navigator.serviceWorker.ready.then(async (registration: any) => {
+        try {
+          await registration.periodicSync.register('trash-collection-check', {
+            minInterval: 60 * 60 * 1000, // 1 hour in milliseconds
+          });
+          console.info('Periodic Sync registration ok')
+        } catch (error) {
+          console.error('Periodic Sync registration failed:', error);
+        }
+      });
+    }
   }, []);
 
   return (
