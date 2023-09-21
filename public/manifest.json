@@ -5,6 +5,7 @@
   "description": "App per la creazione di un calendario di raccolta settimanale, con promemoria tramite notifiche push",
   "display": "standalone",
   "theme_color": "#15803D",
+  "background_color": "#242424",
   "icons": [
     {
       "src": "pwa-192x192.png",
