@@ -30,8 +30,8 @@ export default function DayCell({ weekday }: Props) {
       <div
         onClick={handleToggleWasteSelectionModal}
         className={`relative [width:clamp(16rem,15vw,30rem)] p-4 flex flex-col gap-5 ${
-          isToday ? "bg-green-950" : isTomorrow ? "bg-green-800" : ""
-        } border-green-700 border-2 rounded-md hover:[box-shadow:0px_0px_6px_2px_#227744] hover:cursor-pointer`}
+          isToday ? "bg-green-800" : isTomorrow ? "bg-green-700" : "bg-green-950"
+        } border-green-700 border-2 rounded-lg hover:[box-shadow:0px_0px_6px_2px_#227744] hover:cursor-pointer`}
       >
         
         <p>
@@ -45,14 +45,6 @@ export default function DayCell({ weekday }: Props) {
 
         <div id={weekday} className="w-full flex gap-2">
           <WasteTypesList weekday={weekday} />
-          <button
-            onClick={handleToggleWasteSelectionModal}
-            className="relative p-3 ml-auto h-12 w-12 border-[#eee] border-2 rounded-full hover:border-green-400 hover:text-green-400 [filter:invert(0%)]"
-          >
-            <span className="absolute -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 text-2xl -mt-1">
-              +
-            </span>
-          </button>
         </div>
 
       </div>

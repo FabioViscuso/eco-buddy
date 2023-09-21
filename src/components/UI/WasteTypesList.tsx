@@ -20,6 +20,7 @@ export default function WasteTypesList({ weekday }: Props) {
           bgColor={wasteTypes.find((type) => type.type === wasteType)!.bgColor}
         />
       ))}
+      {CalendarData[weekday].length === 0 && <p>(Vuoto)</p>}
     </>
   );
 }
