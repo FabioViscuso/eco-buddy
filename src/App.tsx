@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 
 import "./index.css";
+import CalendarStore from "./state/useCalendarStore";
 import settingsStore from "./state/useSettingsStore";
 import viewsStore, { Views } from "./state/useViewsStore";
 import uiStore from "./state/useUIStore";
@@ -12,21 +13,22 @@ import Settings from "./components/views/Settings";
 import { dbInterface } from "./utils/db";
 
 function App() {
+  const { syncCalendar } = CalendarStore();
   const { setIsNotificationAllowed, setNotificationHour } = settingsStore();
   const { view, setView } = viewsStore();
   const { isSettingsModalOpen, isFirstTime } = uiStore();
 
   useEffect(() => {
-    if (isFirstTime) {
-      setView(Views.Welcome);
-    }
+    if (isFirstTime) {setView(Views.Welcome);}
     (async function name() {
       const savedNotificationPermission = await dbInterface.getItem("isNotificationAllowed");
       const savedNotificationHour = await dbInterface.getItem("notificationHour");
+      const localDBData = await dbInterface.getItem("CalendarData");
       setIsNotificationAllowed(savedNotificationPermission);
-      setNotificationHour(savedNotificationHour)
+      setNotificationHour(savedNotificationHour);
+      syncCalendar(localDBData);
     })()
-  }, [isFirstTime, setView]);
+  }, []);
 
   return (
     <>

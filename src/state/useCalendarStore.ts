@@ -1,6 +1,7 @@
 import { create } from "zustand";
-import { devtools, persist, createJSONStorage } from "zustand/middleware";
+import { devtools } from "zustand/middleware";
 import { DayOfWeek } from "../utils/weekDays";
+import { dbInterface } from "../utils/db";
 
 export type WasteType = string;
 
@@ -9,13 +10,51 @@ type State = {
   addToCalendar: (day: DayOfWeek, wasteType: WasteType) => void;
   removeFromCalendar: (day: DayOfWeek, wasteType: WasteType) => void;
   resetCalendar: () => void;
+  syncCalendar: (calendarData: Record<DayOfWeek, WasteType[]>) => void;
 };
 
-const CalendarStore = create<State>()(
-  devtools(
-    persist(
-      (set) => ({
-        CalendarData: {
+const calendarStore = create<State>()(
+  devtools((set) => ({
+    CalendarData: {
+      Lunedì: [],
+      Martedì: [],
+      Mercoledì: [],
+      Giovedì: [],
+      Venerdì: [],
+      Sabato: [],
+      Domenica: [],
+    },
+    addToCalendar: (day, wasteType) => {
+      set((state) => {
+        const updatedCalendarData = {
+          ...state.CalendarData,
+          [day]: [...state.CalendarData[day], wasteType],
+        };
+
+        dbInterface.setItem('CalendarData', updatedCalendarData);
+
+        return {
+          CalendarData: updatedCalendarData,
+        };
+      });
+    },
+    removeFromCalendar: (day, wasteType) => {
+      set((state) => {
+        const updatedCalendarData = {
+          ...state.CalendarData,
+          [day]: state.CalendarData[day].filter((type) => type !== wasteType),
+        };
+
+        dbInterface.setItem('CalendarData', updatedCalendarData);
+
+        return {
+          CalendarData: updatedCalendarData,
+        };
+      });
+    },
+    resetCalendar: () => {
+      set(() => {
+        const updatedCalendarData = {
           Lunedì: [],
           Martedì: [],
           Mercoledì: [],
@@ -23,53 +62,35 @@ const CalendarStore = create<State>()(
           Venerdì: [],
           Sabato: [],
           Domenica: [],
-        },
-        addToCalendar: (day, wasteType) => {
-          set((state) => {
-            const updatedCalendarData = {
-              ...state.CalendarData,
-              [day]: [...state.CalendarData[day], wasteType],
-            };
+        };
 
-            return {
-              CalendarData: updatedCalendarData,
-            };
-          });
-        },
-        removeFromCalendar: (day, wasteType) => {
-          set((state) => {
-            const updatedCalendarData = {
-              ...state.CalendarData,
-              [day]: state.CalendarData[day].filter(
-                (type) => type !== wasteType
-              ),
-            };
+        dbInterface.setItem('CalendarData', updatedCalendarData);
 
-            return {
-              CalendarData: updatedCalendarData,
-            };
-          });
-        },
-        resetCalendar: () => {
-          set({
-            CalendarData: {
-              Lunedì: [],
-              Martedì: [],
-              Mercoledì: [],
-              Giovedì: [],
-              Venerdì: [],
-              Sabato: [],
-              Domenica: [],
-            },
-          });
-        },
-      }),
-      {
-        name: "CalendarState",
-        storage: createJSONStorage(() => localStorage),
+        return {
+          CalendarData: updatedCalendarData
+        }
+      });
+    },
+    syncCalendar: (incomingCalendarData) => set(() => {
+      if (!incomingCalendarData) {
+        return {
+          CalendarData: {
+            Lunedì: [],
+            Martedì: [],
+            Mercoledì: [],
+            Giovedì: [],
+            Venerdì: [],
+            Sabato: [],
+            Domenica: [],
+          }
+        }
+      } else {
+        return {
+          CalendarData: incomingCalendarData
+        }
       }
-    )
-  )
+    })
+  }))
 );
 
-export default CalendarStore;
+export default calendarStore;

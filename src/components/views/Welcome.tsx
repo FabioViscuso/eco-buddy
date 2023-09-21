@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { Views } from "../../state/useViewsStore";
 import mainStore from "../../state/useSettingsStore";
 import ViewSelectionButton from "../UI/ViewSelectionButton";
@@ -19,18 +18,12 @@ export default function Welcome() {
     }
   };
 
-  useEffect(() => {
-    if (Notification.permission === 'granted' && isNotificationAllowed) {
-      setIsNotificationAllowed(true)
-    }
-  })
-
   return (
     <section
       id={`section-${context}`}
       className="h-full w-full flex flex-col justify-center items-center gap-10"
     >
-      <h1 className="text-green-400 text-4xl">Ciao!</h1>
+      <h1 className="text-green-400 text-4xl">Ciao! 👋</h1>
       <p className="text-center">
         Con Eco Buddy puoi gestire il calendario della raccolta differenziata e,
         se vuoi, ricevere una notifica appena arriva il momento di conferirla.
@@ -39,7 +32,7 @@ export default function Welcome() {
         onClick={requestNotifPermittions}
         className="bg-green-500 py-2 px-4 rounded-md text-black"
       >
-        <p>{isNotificationAllowed ? "Hai attivato le notifiche!" : "Attiva le notifiche"}</p>
+        <p>{isNotificationAllowed ? "✅ Hai attivato le notifiche! ✅" : "👉 Attiva le notifiche 👈"}</p>
         <p className="text-xs">{`(Potrai cambiare scelta dalle impostazioni)`}</p>
       </button>
       <div className="flex">
