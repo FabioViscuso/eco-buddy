@@ -38,7 +38,7 @@ export default function WasteType({
       style={{ backgroundColor: bgColor }}
     >
       <p className="[filter:invert(100%)]">{wasteType}</p>
-      <img src={icon} className="h-8 w-8" />
+      <img src={icon} width={64} height={64} className="h-8 w-8" alt={`${wasteType}`} />
       <AddRemoveIcon isWasteTypePresent={isWasteTypePresentInWeeklyCalendar} />
     </div>
   );
